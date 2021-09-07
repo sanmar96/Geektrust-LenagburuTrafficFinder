@@ -11,26 +11,25 @@ public class MainClass {
 
     public static void main(String[] args) throws IOException {
 
-         var config = new ApplicationConfig();
+         ApplicationConfig config = new ApplicationConfig();
 
-         var VehicleDataProcessor = config.getVehicleCSVProcessor();
+         DataProcessor VehicleDataProcessor = config.getVehicleCSVProcessor();
 
          VehicleDataProcessor.execute();
 
-         var OrbitDataProcessor = config.getOrbitCSVProcessor();
+         DataProcessor  OrbitDataProcessor = config.getOrbitCSVProcessor();
 
          OrbitDataProcessor.execute();
 
-         var WeatherDataProcessor = config.getWeatherCSVProcessor();
+         DataProcessor WeatherDataProcessor = config.getWeatherCSVProcessor();
 
          WeatherDataProcessor.execute();
 
-
-         var InputDataProcessor = config.getInputDataProcessor();
+         InputDataProcessor inputDataProcessor = config.getInputDataProcessor();
 
          String inputTextFile = args[0];
 
-         InputResponse inputResponse = InputDataProcessor.execute(inputTextFile);
+         InputResponse inputResponse = inputDataProcessor.execute(inputTextFile);
 
          //map which stores the speed of each orbit with key as orbit name.
          Map<String,Integer> orbitSpeeds = inputResponse.getOrbitspeeds();
@@ -42,7 +41,7 @@ public class MainClass {
          OutputResponse outputResponse = config.lengaburuTrafficSolution(inputResponse.getWeather());
 
          //calling the display method to print the answer on the console
-         var printResponse = config.printTheSolution();
+         PrintResponse printResponse = config.printTheSolution();
 
          printResponse.display(outputResponse);
 
